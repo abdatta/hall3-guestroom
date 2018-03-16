@@ -1,0 +1,22 @@
+<div class="legend" 
+	 fxLayout="row" 
+     fxLayoutAlign="center center"
+     fxLayoutWrap >
+	<div *ngFor="let color of colors; let i=index;" 
+		 class="mat-form-field" 
+		 fxFlex="50" 
+		 fxLayout="row" 
+		 fxLayoutAlign="center center">
+		<div fxFlex="nogrow" style="display: inherit; padding: 1vw;">
+			<span class="color" [style.background-color]="color"></span>
+			<span style="margin-left: 1vw;">{{4-i}} Booked</span>
+		</div>
+	</div>
+</div>
+
+<mat-calendar
+	[appAvailability]="dates"
+	[appColors]="colors"
+	[minDate]="minDate"
+	[maxDate]="maxDate"
+    [dateFilter]=""></mat-calendar>

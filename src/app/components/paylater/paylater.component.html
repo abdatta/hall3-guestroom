@@ -1,0 +1,54 @@
+<div class="payment"
+	 fxLayout
+     fxLayoutAlign="center center">
+	<mat-card>
+		<mat-card-title>Payment</mat-card-title>
+		<mat-card-subtitle>Booking ID: {{id}}</mat-card-subtitle>
+		<mat-card-content *ngIf="loaded && !payerror">
+			<div fxLayout fxLayoutAlign="space-between center">
+				<span>Particulars</span>
+				<span>Charges</span>
+			</div>
+			<div class="br"></div>
+			<div fxLayout fxLayoutAlign="space-between center">
+				<span>Room Rent (×&nbsp;{{data.rooms}}&nbsp;Rooms&nbsp;×&nbsp;{{getDays()}}&nbsp;Days)</span>
+				<span>₹&nbsp;{{roomrent.toFixed(2)}}</span>
+			</div>
+			<div fxLayout fxLayoutAlign="space-between center">
+				<span>Automation Charges</span>
+				<span>₹&nbsp;{{automation.toFixed(2)}}</span>
+			</div>
+			<div class="br"></div>
+			<div fxLayout fxLayoutAlign="space-between center">
+				<span class="total">Total</span>
+				<span class="total">₹&nbsp;{{(roomrent+automation).toFixed(2)}}</span>
+			</div>
+			<br>
+			<div fxLayout fxLayoutAlign="center center">
+				<button mat-raised-button
+						(click)="openpayment()"
+						[disabled]="sending">Make Payment</button>
+			</div>
+		</mat-card-content>
+		<mat-card-content *ngIf="already_paid">
+			<div class="paid">
+				<span>It seems the payment for this booking is already made.</span>
+			</div>
+			<br>
+			<div fxLayout fxLayoutAlign="center center">
+				<button mat-raised-button routerLink="/">Go Home</button>
+			</div>
+		</mat-card-content>
+		<mat-card-content *ngIf="payerror">
+			<div fxLayout="column" fxLayoutAlign="center center">
+				<span class="payerror">We are sorry, the payment service is currently unavailable.</span>
+				<span class="payerror">If you are persistently seeing this error for more than a day, kindly contact:</span>
+				<span class="payerror contact">Mr. Abhishek Datta, Mob: 7318019046, Email: abdatta@iitk.ac.in</span>
+			</div>
+			<br>
+			<div fxLayout fxLayoutAlign="center center">
+				<button mat-raised-button routerLink="/">Ok</button>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</div>

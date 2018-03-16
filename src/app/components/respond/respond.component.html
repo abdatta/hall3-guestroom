@@ -1,0 +1,12 @@
+<div class="resp"
+	 fxLayout
+     fxLayoutAlign="center center">
+	<mat-card>
+		<mat-card-title *ngIf="!processing; else spinner">
+			{{ success?'Accepted':'Failure' }}
+		</mat-card-title>
+		<ng-template #spinner>
+			<mat-spinner></mat-spinner>
+		</ng-template>
+	</mat-card>
+</div>

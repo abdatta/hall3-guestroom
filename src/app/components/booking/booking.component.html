@@ -1,0 +1,217 @@
+<div class="book"
+	 fxLayout
+     fxLayoutAlign="center center">
+	<mat-card>
+		<mat-card-title>Application Form</mat-card-title>
+		<mat-horizontal-stepper [linear]="true" *ngIf="!sent">
+  			<mat-step [stepControl]="infoForm">
+  				<ng-template matStepLabel>Basic Info</ng-template>
+				<!--mat-card-subtitle>Basic Information</mat-card-subtitle-->
+				<mat-card-content>
+					<form fxLayout fxLayoutWrap fxLayoutAlign="center center" [formGroup]="infoForm">
+					  	<mat-form-field fxFlex.xs="100" fxFlex="47">
+					    	<input  matInput
+					    			type="text" 
+					    		   	name="name" 
+					    		   	[(ngModel)]="data.name"
+					    		   	placeholder="Name of the Applicant"
+					    		   	formControlName="nameCtrl"
+					    		   	required>
+					  	</mat-form-field>
+					  	<mat-form-field fxFlex="47" fxFlexOffset.gt-xs="6">
+					    	<input 	matInput
+					    			type="text" 
+					    			name="roll"
+					    		 	[(ngModel)]="data.roll" 
+					    		 	placeholder="Roll Number" 
+					    		 	formControlName="rollCtrl"
+					    		 	required>
+					  	</mat-form-field>
+					  	<mat-form-field fxFlex="47" fxFlexOffset.xs="6">
+					    	<input 	matInput
+					    			type="text" 
+					    			name="phone"
+					    			[(ngModel)]="data.phone"
+					    			placeholder="Contact Number"
+					    			formControlName="phoneCtrl"
+					    			maxlength="10" 
+					    			required>
+					  		<span matPrefix>+91 </span>
+					  	</mat-form-field>
+					  	<mat-form-field fxFlex.xs="100" fxFlex="47" fxFlexOffset.gt-xs="6">
+					    	<input  matInput
+					    			type="email" 
+					    		   	name="email" 
+					    		   	[(ngModel)]="data.email"
+					    		   	placeholder="Email"
+					    		   	formControlName="emailCtrl"
+					    		   	required>
+					  	</mat-form-field>
+						<mat-form-field fxFlex="100">
+					    	<input 	matInput 
+					    			type="text"
+					    			name="visit" 
+					    			[(ngModel)]="data.visit" 
+					    			placeholder="Reason of visit" 
+					    			formControlName="visitCtrl" 
+					    			required>
+					  	</mat-form-field>
+					  	<mat-form-field fxFlex="100">
+					    	<textarea 	matInput
+					    				matTextareaAutosize
+					    				name="address" 
+					    	 			[(ngModel)]="data.addr"
+					    	 			placeholder="Permanent Address of the Guest"
+					    	 			rows="1"
+					    	 			formControlName="addrCtrl" 
+					    	 			required>	
+					    	</textarea>
+					  	</mat-form-field>
+					</form>
+				</mat-card-content>
+				<button mat-raised-button matStepperNext [disabled]="!loaded">Next</button>
+			</mat-step>
+			<mat-step [stepControl]="datesForm" [class.disable]>
+				<ng-template matStepLabel>Pick Dates</ng-template>
+				<!--mat-card-subtitle>Pick Dates</mat-card-subtitle-->
+				<mat-card-content>
+					<form fxLayout fxLayoutWrap fxLayoutAlign="center center" [formGroup]="datesForm">
+						<mat-form-field fxFlex="100">
+					    	<mat-select [(ngModel)]="data.rooms" 
+					    				placeholder="Number of Rooms" 
+					    				formControlName="roomsCtrl" 
+					    				(change)="datesForm.get('fromCtrl').updateValueAndValidity();datesForm.get('toCtrl').updateValueAndValidity();"
+					    				required>
+							    <mat-option [value]="1">1</mat-option>
+							    <mat-option [value]="2">2</mat-option>
+							    <mat-option [value]="3">3</mat-option>
+							    <mat-option [value]="4">4</mat-option>
+							</mat-select>
+					  	</mat-form-field>
+					  	<mat-form-field fxFlex="47">
+					    	<input 	matInput (dateChange)="datesForm.get('toCtrl').updateValueAndValidity();"
+					    			(mousedown)="from.open()"
+					    			type="text"
+					    			name="from" 
+					    			[(ngModel)]="data.from" 
+					    			[matDatepicker]="from" 
+					    			[min]="minDate" [max]="maxDate"
+					    			placeholder="From" 
+					    			formControlName="fromCtrl" 
+					    			required>
+			    			<mat-error *ngIf="datesForm.get('fromCtrl').hasError('validateAvailability')">
+						    	<strong>Unavailable</strong>
+						    </mat-error>
+							<mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+							<mat-datepicker #from></mat-datepicker>
+					  	</mat-form-field>
+					  	<mat-form-field fxFlex="47" fxFlexOffset="6">
+					    	<input 	matInput (dateChange)="datesForm.get('fromCtrl').updateValueAndValidity();"
+					    			(mousedown)="to.open()"
+					    			type="text"
+					    			name="to" 
+					    			[(ngModel)]="data.to" 
+					    			[matDatepicker]="to" 
+					    			[min]="minDate" [max]="maxDate"
+					    			placeholder="To" 
+					    			formControlName="toCtrl" 
+					    			required>
+			    			<mat-error  *ngIf="datesForm.get('toCtrl').hasError('validateAvailability')">
+						    	<strong>Unavailable</strong>
+						    </mat-error>
+							<mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+							<mat-datepicker #to></mat-datepicker>
+					  	</mat-form-field>
+					  	<div>
+					  		<p>Check available dates from the menubar.</p>
+					  	</div>
+					</form>
+				</mat-card-content>
+				<button mat-raised-button matStepperNext  [disabled]="!loaded">Next</button>
+			</mat-step>
+			<mat-step [stepControl]="guestsForm">
+				<ng-template matStepLabel>Guest Details</ng-template>
+				<!--mat-card-subtitle>Guest Details</mat-card-subtitle-->
+				<mat-card-content>
+					<form fxLayout fxLayoutWrap fxLayoutAlign="center center" [formGroup]="guestsForm">
+						<div formArrayName="guests">
+						<mat-accordion>
+							<mat-expansion-panel [formGroupName]="i" *ngFor="let guest of data.guests; let i = index">
+								 	<mat-expansion-panel-header>
+								    	<mat-panel-title>
+								    		{{ (i+1) }}.
+								    	</mat-panel-title>
+								    	<mat-panel-description>
+								    		<mat-form-field floatPlaceholder="never">
+							    				<input matInput
+						    								[(ngModel)]="guest.name" 
+						    								placeholder="Name" 
+						    								formControlName="nameCtrl" 
+						    								required>
+							  				</mat-form-field>
+								    	</mat-panel-description>
+								  	</mat-expansion-panel-header>
+								  	<div fxLayout fxLayoutWrap>
+								  		<mat-form-field floatPlaceholder="never" fxFlex="20">
+									    	<input matInput type="number" min="0" 
+								    					[(ngModel)]="guest.age" 
+								    					placeholder="Age" 
+								    					formControlName="ageCtrl" 
+								    					required>
+									  	</mat-form-field>
+									  	<mat-form-field floatPlaceholder="never" fxFlex="20" fxFlexOffset="4">
+									    	<mat-select [(ngModel)]="guest.sex" placeholder="Sex" formControlName="sexCtrl" required>
+											    <mat-option value="M">M</mat-option>
+											    <mat-option value="F">F</mat-option>
+											</mat-select>
+								  		</mat-form-field>
+								  		<mat-form-field floatPlaceholder="never" fxFlex="52" fxFlexOffset="4">
+								    		<input matInput 
+								    					[(ngModel)]="guest.rel" 
+								    					placeholder="Relation" 
+								    					formControlName="relCtrl" 
+								    					required>
+								  		</mat-form-field>
+							  		</div>
+						  	</mat-expansion-panel>
+					  </mat-accordion>
+					</div></form>
+				</mat-card-content>
+				<div fxLayout fxLayoutAlign="center center">
+					<button mat-button 
+							fxFlex.gt-xs="35" 
+							fxFlex="45" 
+							(click)="addGuest()">
+						<mat-icon>person_add</mat-icon> Add
+					</button>
+					<button mat-button 
+							fxFlex.gt-xs="35" 
+							fxFlex="45" 
+							fxFlexOffset="5" 
+							(click)="removeGuest()">
+						<mat-icon>delete</mat-icon> Remove
+					</button>
+				</div>
+				<button mat-raised-button
+							matStepperNext 
+							submit 
+							(click)="paynow()"
+							[disabled]="sending || !loaded">Proceed to Payment</button>
+				<div fxLayout fxLayoutAlign="center center">
+					<a 	style="font-size: x-small;padding-top: 12px;"
+						routerLink="/book" 
+						submit
+						(click)="book()">Or Book and Pay Later</a>
+				</div>
+			</mat-step>
+		</mat-horizontal-stepper>
+		<mat-card-content *ngIf="sent" fxLayout="column" fxLayoutAlign="center center" style="padding: 20px 10px;">
+			<h2 class="sent">Booking Request Sent!</h2>
+			<h3 class="sent">Your Token ID : {{tokenId}}</h3>
+			<div>We have sent you an email with the payment link.</div>
+			<div>The payment link will be valid only till 27/02/2018 23:59</div>
+			<div>after which your booking will be cancelled, if not paid.</div>
+		</mat-card-content>
+		<button *ngIf="sent" mat-raised-button>Ok</button>
+	</mat-card>
+</div>

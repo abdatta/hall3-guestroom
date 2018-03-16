@@ -1,0 +1,37 @@
+.app {
+	min-height: 100vh;
+}
+
+mat-card {
+	display: inline-block;
+	width: 100%;
+	padding: 0px;
+}
+
+.header {
+	 margin-bottom: 20px;
+}
+
+.body {
+	width: 85%;
+}
+
+.footer {
+	margin-top: 20px;
+}
+
+button {
+	padding: 10px 20px;
+}
+
+input {
+	display: none;
+}
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}

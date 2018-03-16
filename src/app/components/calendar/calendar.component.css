@@ -1,0 +1,28 @@
+.legend {
+	padding: 12px;
+	margin-bottom: -20px;
+}
+
+.color {
+	width: 1em;
+	height: 1em;
+	border-radius: 50%;
+	margin: 0;
+}
+
+.mat-calendar {
+    width: initial;
+    height: initial;
+}
+
+:host >>> .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border-color: transparent;
+}
+
+:host >>> .mat-calendar-body-cell {
+    cursor: default;
+}
+
+:host >>> .mat-calendar-body-cell:hover > div {
+    background-color: transparent !important;
+}

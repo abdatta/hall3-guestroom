@@ -1,0 +1,30 @@
+.payment {
+	
+}
+
+mat-card {
+	width:85%;
+	max-width: 450px;
+}
+
+mat-card-title, mat-card-subtitle, div.paid, span.payerror {
+	text-align: center;
+}
+
+span {
+	font-size: large;
+	padding-bottom: 10px;
+}
+
+span.total {
+	font-size: xx-large;
+}
+
+span.payerror.contact {
+	font-size: 15px;
+}
+
+.br {
+    height: 10px;
+    border-top: black 1px solid;	
+}

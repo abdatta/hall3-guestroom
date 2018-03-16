@@ -1,0 +1,41 @@
+.book {
+	
+}
+
+.mat-input-element {
+    color: initial;
+}
+
+button[matStepperNext] {
+	margin: 3px 0;
+}
+
+button[submit] {
+	margin-top: 25px;
+}
+
+mat-card {
+	width: 100%;
+	max-width: 475px;
+}
+
+mat-card {
+	text-align: center;
+}
+
+mat-panel-title.mat-expansion-panel-header-title {
+    padding-top: 20px;
+}
+
+h2.sent {
+	font-weight: 540;
+	margin-bottom: 5px;
+}
+
+h3.sent {
+	font-weight: 530;
+}
+
+.disable {
+	pointer-events: none !important;
+}
